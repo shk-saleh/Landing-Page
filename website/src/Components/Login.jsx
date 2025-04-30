@@ -4,20 +4,21 @@ import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email.trim(), password);
+      console.log("Trying to login with email:", email);
       navigate("/dashboard");
     } catch (error) {
       alert(error.message);
     }
   };
-
+  
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="card w-96 bg-base-100 shadow-xl p-5">
